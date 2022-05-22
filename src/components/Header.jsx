@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchPosts, fetchPosts } from "@/store/slices/posts";
+import search from "@/assets/img/search.svg";
 
 function Header() {
-  const [showMenu, setShowMenu] = useState(false);
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
 
   function searchPostsByQuery(e) {
     dispatch(searchPosts(query));
     e.preventDefault();
-  }
-
-  function inputHandler(e) {
-    setQuery(e.target.value);
   }
 
   useEffect(() => {
@@ -31,25 +27,21 @@ function Header() {
           </a>
 
           <button
-            className={"navbar-toggler" + (showMenu ? " collapsed" : "")}
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-            onClick={() => setShowMenu(!showMenu)}>
-            <span className="navbar-toggler-icon"></span>
+            aria-label="Toggle navigation">
+            <img src={search} style={{ width: "20px", height: "24px" }} />
           </button>
 
           <div
-            className={
-              "collapse navbar-collapse align-items-center pt-lg-0 pt-3" +
-              (showMenu ? " show" : "")
-            }
+            className="collapse navbar-collapse align-items-center"
             id="navbarSupportedContent">
             <form
-              className="d-flex ms-auto"
+              className="d-flex ms-auto mt-lg-0 mt-3"
               role="search"
               onSubmit={searchPostsByQuery}>
               <input
@@ -57,7 +49,7 @@ function Header() {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
-                onInput={inputHandler}
+                onInput={(e) => setQuery(e.target.value)}
               />
 
               <button className="btn btn-outline-light" type="submit">

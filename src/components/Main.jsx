@@ -17,10 +17,6 @@ function Main() {
     dispatch(fetchPosts());
   }, []);
 
-  const postsList = posts.map((post, index) => (
-    <Post key={index} post={post} />
-  ));
-
   return (
     <main className="posts container py-4 d-flex flex-column justify-content-start align-items-start">
       <h1 className="mb-4">Posts</h1>
@@ -28,7 +24,9 @@ function Main() {
         <p className="fs-5">There are no suitable posts for this criteria</p>
       )}
 
-      {postsList}
+      {posts.map((post, index) => (
+        <Post key={index} post={post} />
+      ))}
 
       {showNextPageBtn && (
         <button
